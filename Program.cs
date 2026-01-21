@@ -10,7 +10,7 @@
         Console.WriteLine("4: Exit the Program");
         string userChoice = Console.ReadLine();
 
-        while (userChoice == "1" || userChoice == "2" || userChoice == "3")
+        while (userChoice != "4")
         {
             if (userChoice == "1")
             {
@@ -28,6 +28,7 @@
                 {
                     itemQuantity = int.Parse(Console.ReadLine());
                 }
+
                 catch (FormatException)
                 {
                     Console.WriteLine("Invalid input. Please enter a whole number.");
