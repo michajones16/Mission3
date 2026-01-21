@@ -1,4 +1,6 @@
-﻿internal class Program
+﻿using Mission3;
+
+internal class Program
 {
     private static int NumberInput()
     {
@@ -53,6 +55,8 @@
         Console.WriteLine("4: Exit the Program");
         string userChoice = Console.ReadLine();
 
+        List<FoodItem> allFood = new List<FoodItem>();
+
         while (userChoice != "4")
         {
             if (userChoice == "1")
@@ -66,13 +70,14 @@
                 Console.WriteLine("Enter a quantity for the item:");
 
                 int itemQuantity = NumberInput();
+                DateTime itemExpDate;
 
                 while (true)
                 {
                     try
                     {
                         int[] dateParts = DateInput();
-                        DateTime itemExpDate = new DateTime(dateParts[0], dateParts[1], dateParts[2]);
+                        itemExpDate = new DateTime(dateParts[0], dateParts[1], dateParts[2]);
                         break;
                     }
                     catch (ArgumentOutOfRangeException)
@@ -80,6 +85,8 @@
                         Console.WriteLine("Invalid date. Please try again.");
                     }
                 }
+                FoodItem newFood = new FoodItem(itemName, itemCategory, itemQuantity, itemExpDate);
+                allFood.Add(newFood);
             }
 
             Console.WriteLine("Welcome to the Food Bank System!");
