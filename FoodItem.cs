@@ -6,17 +6,18 @@ namespace Mission3
 {
     internal class FoodItem
     {
-        private string foodName;
-        private string foodCategory;
-        private int foodQuantity;
-        private DateTime foodExpDate;
+        public string Name { get; }
+        public string Category { get; }
+        public int Quantity { get; }
+        public DateTime ExpDate { get; }
 
         public FoodItem(string name, string category, int quantity, DateTime expDate)
         {
-            foodName = name;
-            foodCategory = category;
-            foodQuantity = quantity;
-            foodExpDate = expDate;
+            Name = name;
+            Category = category;
+            Quantity = quantity;
+            ExpDate = expDate;
         }
     }
+
 }

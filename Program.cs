@@ -1,4 +1,5 @@
 ﻿using Mission3;
+using System.Collections.Generic;
 
 internal class Program
 {
@@ -45,6 +46,16 @@ internal class Program
         return [expYear, expMonth, expDay];
     }
 
+    private static void printList(List<FoodItem> list)
+    {
+        list = list.OrderBy(item => item.ExpDate).ToList();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            Console.WriteLine("\n" + (i + 1) + ": " + list[i].Name + " - " + list[i].Category + " - " + list[i].Quantity + " - " + list[i].ExpDate.ToString("yyyy-MM-dd"));
+        }
+    }
+
     private static void Main(string[] args)
     {
         Console.WriteLine("Welcome to the Food Bank System!");
@@ -88,8 +99,56 @@ internal class Program
                 FoodItem newFood = new FoodItem(itemName, itemCategory, itemQuantity, itemExpDate);
                 allFood.Add(newFood);
             }
+            else if (userChoice == "2")
+            {
+                string itemName = "";
+                List<FoodItem> matchingFood = new List<FoodItem>();
+                List<int> listIndexes = new List<int>();
 
-            Console.WriteLine("Welcome to the Food Bank System!");
+                while (matchingFood.Count == 0)
+                {
+                    Console.WriteLine("Enter the name of the item you would like to delete:");
+                    itemName = Console.ReadLine();
+
+                    allFood = allFood.OrderBy(item => item.ExpDate).ToList();
+
+                    for (int i = 0; i < allFood.Count; i++)
+                    {
+                        if (allFood[i].Name == itemName)
+                        {
+                            matchingFood.Add(allFood[i]);
+                            listIndexes.Add(i);
+                        }
+                    }
+
+                    if (matchingFood.Count > 1)
+                    {
+                        printList(matchingFood);
+                        Console.WriteLine(matchingFood.Count + " items have that name. Which one would you like to delete (enter the number)?");
+                        int itemIndex = NumberInput();
+                        while (itemIndex > matchingFood.Count || itemIndex < 0)
+                        {
+                            Console.WriteLine("Enter an number on the list.");
+                            itemIndex = NumberInput();
+                            allFood.RemoveAt(listIndexes[itemIndex - 1]);
+                        }
+                    }
+                    else if (matchingFood.Count == 1)
+                    {
+                        allFood.RemoveAt(listIndexes[0]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No food item was found with that name.\n");
+                    }
+                }
+            }
+            else if (userChoice == "3")
+            {
+                printList(allFood);
+            }
+
+            Console.WriteLine("\nWelcome to the Food Bank System!");
             Console.WriteLine("Pick a number to continue:");
             Console.WriteLine("1: Add Food Items");
             Console.WriteLine("2: Delete Food Items");
