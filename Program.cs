@@ -53,18 +53,19 @@ internal class Program
 
         for (int i = 0; i < list.Count; i++)
         {
-            Console.WriteLine((i + 1) + ": " + list[i].Name + " - " + list[i].Category + " - " + list[i].Quantity + " - " + list[i].ExpDate.ToString("yyyy-MM-dd"));
+            Console.WriteLine((i + 1) + ": " + list[i].Name + " - " + list[i].Category +
+                " - " + list[i].Quantity + " - " + list[i].ExpDate.ToString("yyyy-MM-dd"));
         }
     }
 
     private static void Main(string[] args)
     {
         Console.WriteLine("Welcome to the Food Bank System!");
-        Console.WriteLine("Pick a number to continue:");
-        Console.WriteLine("1: Add Food Items");
+        Console.WriteLine("\n1: Add Food Items");
         Console.WriteLine("2: Delete Food Items");
         Console.WriteLine("3: Print List of Current Food Items");
         Console.WriteLine("4: Exit the Program");
+        Console.WriteLine("\nPick a number to continue:");
         string userChoice = Console.ReadLine();
 
         List<FoodItem> allFood = new List<FoodItem>();
@@ -73,8 +74,6 @@ internal class Program
         {
             if (userChoice == "1")
             {
-                Console.WriteLine("\n");
-
                 Console.WriteLine("Enter a name for the item: ");
                 string itemName = Console.ReadLine();
 
@@ -104,8 +103,6 @@ internal class Program
             }
             else if (userChoice == "2")
             {
-                Console.WriteLine("\n");
-
                 string itemName = "";
                 List<FoodItem> matchingFood = new List<FoodItem>();
                 List<int> listIndexes = new List<int>();
@@ -156,16 +153,16 @@ internal class Program
                 }
                 else
                 {
-                    Console.WriteLine("No items to display.");
+                    Console.WriteLine("\nNo items to display.");
                 }
             }
 
             Console.WriteLine("\nWelcome to the Food Bank System!");
-            Console.WriteLine("Pick a number to continue:");
-            Console.WriteLine("1: Add Food Items");
+            Console.WriteLine("\n1: Add Food Items");
             Console.WriteLine("2: Delete Food Items");
             Console.WriteLine("3: Print List of Current Food Items");
             Console.WriteLine("4: Exit the Program");
+            Console.WriteLine("\nPick a number to continue:");
             userChoice = Console.ReadLine();
         }
     }
