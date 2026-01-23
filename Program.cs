@@ -49,10 +49,11 @@ internal class Program
     private static void printList(List<FoodItem> list)
     {
         list = list.OrderBy(item => item.ExpDate).ToList();
+        Console.WriteLine("\n");
 
         for (int i = 0; i < list.Count; i++)
         {
-            Console.WriteLine("\n" + (i + 1) + ": " + list[i].Name + " - " + list[i].Category + " - " + list[i].Quantity + " - " + list[i].ExpDate.ToString("yyyy-MM-dd"));
+            Console.WriteLine((i + 1) + ": " + list[i].Name + " - " + list[i].Category + " - " + list[i].Quantity + " - " + list[i].ExpDate.ToString("yyyy-MM-dd"));
         }
     }
 
@@ -72,6 +73,8 @@ internal class Program
         {
             if (userChoice == "1")
             {
+                Console.WriteLine("\n");
+
                 Console.WriteLine("Enter a name for the item: ");
                 string itemName = Console.ReadLine();
 
@@ -101,6 +104,8 @@ internal class Program
             }
             else if (userChoice == "2")
             {
+                Console.WriteLine("\n");
+
                 string itemName = "";
                 List<FoodItem> matchingFood = new List<FoodItem>();
                 List<int> listIndexes = new List<int>();
@@ -130,8 +135,8 @@ internal class Program
                         {
                             Console.WriteLine("Enter an number on the list.");
                             itemIndex = NumberInput();
-                            allFood.RemoveAt(listIndexes[itemIndex - 1]);
                         }
+                        allFood.RemoveAt(listIndexes[itemIndex - 1]);
                     }
                     else if (matchingFood.Count == 1)
                     {
@@ -145,7 +150,14 @@ internal class Program
             }
             else if (userChoice == "3")
             {
-                printList(allFood);
+                if (allFood.Count > 0)
+                {
+                    printList(allFood);
+                }
+                else
+                {
+                    Console.WriteLine("No items to display.");
+                }
             }
 
             Console.WriteLine("\nWelcome to the Food Bank System!");
